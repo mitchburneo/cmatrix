@@ -1,7 +1,7 @@
 /*//////////////////////////////////
-Module Name: list.h				////
+Module Name: list.h		////
 Author: Smirnov D.S., A-06-15	////
-Date: 	May, 2016				////
+Date: 	May, 2016		////
 *///////////////////////////////////
 #pragma once
 

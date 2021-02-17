@@ -1,7 +1,7 @@
 /*//////////////////////////////////
-Program Name: cmatrix_cli		////
+Program Name: cmatrix_cli	////
 Author: Smirnov D.S., A-06-15	////
-Date: 	May, 2016				////
+Date: 	May, 2016		////
 *///////////////////////////////////
 
 #include <iostream>

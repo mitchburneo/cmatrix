@@ -1,17 +1,14 @@
-/*////////////////////////////////
-Module Name: Burn_LAB11	      ////
-Author: Smirnov D.S., A-06    ////
-*///////////////////////////////// 
+/*//////////////////////////////////
+Module Name: binfile.h			////
+Author: Smirnov D.S., A-06-15	////
+Date: 	May, 2016				////
+*///////////////////////////////////
 #pragma once
-
-#define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
 #include <fstream>
-#include <conio.h>
 #include <cstdio>
 #include <stdio.h>
-#include <windows.h>
 
 /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
 
@@ -19,21 +16,21 @@ using namespace std;
 
 /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
 
-struct Elm
-{
-	int value = 0;
-	Elm * right = NULL;
-	Elm * down = NULL;
-};
+#ifndef LOGFILENAME
+	#define LOGFILENAME "logs"
+#endif
 
 struct Matrix
 {
-	Elm * top = NULL;
-	Elm * cur = top;
+	FILE * bin = NULL;
+	const char * name = "matrix";
+	int value;
 
 	int line = 0;
 	int col = 0;
 };
+
+/*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
 
 bool isempty(Matrix * A);
 
@@ -61,10 +58,8 @@ void add_line(Matrix * A);
 
 void free_mem(Matrix * A);
 
-
 void write_tolog(Matrix * A);
 
 void solution(Matrix * A);
-
 
 void print_value(Matrix * A);

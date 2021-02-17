@@ -1,17 +1,14 @@
-/*////////////////////////////////
-Module Name: Burn_LAB11	      ////
-Author: Smirnov D.S., A-06    ////
-*///////////////////////////////// 
+/*//////////////////////////////////
+Module Name: list.h				////
+Author: Smirnov D.S., A-06-15	////
+Date: 	May, 2016				////
+*///////////////////////////////////
 #pragma once
-
-#define _CRT_SECURE_NO_WARNINGS
 
 #include <iostream>
 #include <fstream>
-#include <conio.h>
 #include <cstdio>
 #include <stdio.h>
-#include <windows.h>
 
 /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
 
@@ -19,15 +16,27 @@ using namespace std;
 
 /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
 
+#ifndef LOGFILENAME
+	#define LOGFILENAME "logs"
+#endif
+
+struct Node
+{
+	int value = 0;
+	Node * right = NULL;
+	Node * down = NULL;
+};
+
 struct Matrix
 {
-	FILE * bin = NULL;
-	char * name = "burn.txt";
-	int value;
+	Node * top = NULL;
+	Node * cur = top;
 
 	int line = 0;
 	int col = 0;
 };
+
+/*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
 
 bool isempty(Matrix * A);
 
@@ -55,10 +64,8 @@ void add_line(Matrix * A);
 
 void free_mem(Matrix * A);
 
-
 void write_tolog(Matrix * A);
 
 void solution(Matrix * A);
-
 
 void print_value(Matrix * A);

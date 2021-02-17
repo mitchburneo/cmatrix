@@ -1,4 +1,4 @@
-#include "Burn_LIST.h"
+#include "list.h"
 
 /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
 
@@ -14,7 +14,7 @@ void crt_matrix(Matrix * A, int n, int m)
 	
 	for (int i(0); i < A->line; i++)
 	{
-		Elm * U = new Elm;
+		Node * U = new Node;
 		if (isempty(A))
 		{
 			A->top = U;
@@ -28,7 +28,7 @@ void crt_matrix(Matrix * A, int n, int m)
 	
 	for (int j(0); j < A->col - 1; j++)
 	{
-		Elm * GoLn = A->top, *GoCol = A->top;
+		Node * GoLn = A->top, *GoCol = A->top;
 
 		for (int burn(0); burn < j + 1; burn++)
 		{
@@ -38,7 +38,7 @@ void crt_matrix(Matrix * A, int n, int m)
 		for (int i(0); i < A->line; i++)
 		{
 
-			Elm * U = new Elm;
+			Node * U = new Node;
 			if (i == 0)
 			{
 				GoLn = A->top;
@@ -145,14 +145,14 @@ void add_col(Matrix * A)
 	for (int j(0); j < A->col - 1; j++)
 		next_inline(A);
 
-	Elm * GoLn = A->cur, *GoCol = A->cur;
+	Node * GoLn = A->cur, *GoCol = A->cur;
 
 	GoCol = GoCol->right;
 
 	for (int i(0); i < A->line; i++)
 	{
 
-		Elm * U = new Elm;
+		Node * U = new Node;
 		if (i == 0)
 		{
 			GoCol = U;
@@ -180,13 +180,13 @@ void add_line(Matrix * A)
 {
 	go_toline(A, A->line - 1);
 
-	Elm * GoLn = A->cur, *GoCol = A->cur;
+	Node * GoLn = A->cur, *GoCol = A->cur;
 	GoLn = GoLn->down;
 
 	for (int j(0); j < A->col; j++)
 	{
 
-		Elm * U = new Elm;
+		Node * U = new Node;
 		if (j == 0)
 		{
 			GoLn = U;
@@ -214,7 +214,7 @@ void add_line(Matrix * A)
 
 void free_mem(Matrix * A)
 {
-	Elm * B;
+	Node * B;
 	for (int i(0); i < A->line; i++)
 	{
 		A->cur = A->top;
@@ -238,13 +238,11 @@ void free_mem(Matrix * A)
 
 void write_tolog(Matrix * A)
 {
-	FILE *log = fopen("log.txt", "a+");
+	FILE *log = fopen(LOGFILENAME, "a+");
 
 	if (log == NULL)
 	{
-		printf("Error occuring creating log file\n");
-		printf("Press any key\n");
-		_getch();
+		cout << "Error occuring creating log file" << endl;
 		return;
 	}
 
@@ -269,13 +267,11 @@ void write_tolog(Matrix * A)
 
 void solution(Matrix * A)
 {
-	FILE *log = fopen("log.txt", "a+");
+	FILE *log = fopen(LOGFILENAME, "a+");
 
 	if (log == NULL)
 	{
-		printf("Error occuring creating log file\n");
-		printf("Press any key\n");
-		_getch();
+		cout << "Error occuring creating log file" << endl;
 		return;
 	}
 
@@ -314,19 +310,19 @@ void solution(Matrix * A)
 	fprintf(log, "======================================================\n");
 	if (!check)
 	{
-		cout << "There\'s no zeros\n";
+		cout << "There\'s no zeros" << endl;
 		fprintf(log, "There\'s no zeros\n");
 	}
 	else
 	{
 		if (min == 0) 
 		{
-			cout << "There\'s no positive after first zero\n";
+			cout << "There\'s no positive after first zero" << endl;
 			fprintf(log, "There\'s no positive after first zero\n"); 
 		}
 		else
 		{
-			cout << "Minimal element is " << min << "\nIts index is " << line_index << " line & " << col_index << " column\n";
+			cout << "Minimal element is " << min << "\nIts index is " << line_index << " line & " << col_index << " column" << endl;
 			fprintf(log, "Minimal element is %i\nIts index is %i line & %i column\n", min, line_index, col_index);
 		}
 	}

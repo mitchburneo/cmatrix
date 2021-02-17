@@ -1,4 +1,4 @@
-#include "Burn_REC.h"
+#include "binfile.h"
 
 /*+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
 
@@ -23,11 +23,11 @@ bool isempty(Matrix * A)
 
 void crt_matrix(Matrix * A, int n, int m)
 {
-	if (remove(A->name) == 0) cout << "File have been removed\n";
+	if (remove(A->name) == 0) cout << "File have been removed" << endl;
 	A->bin = fopen(A->name, "w+b");
 	if (A->bin == NULL)
 	{
-		cout << "Error occuring creating file\nPress any key" << endl;
+		cout << "Error occuring creating file" << endl;
 		return;
 	}
 
@@ -192,13 +192,11 @@ void free_mem(Matrix * A)
 
 void write_tolog(Matrix * A)
 {
-	FILE *log = fopen("log.txt", "a+");
+	FILE *log = fopen(LOGFILENAME, "a+");
 
 	if (log == NULL)
 	{
-		printf("Error occuring creating log file\n");
-		printf("Press any key\n");
-		_getch();
+		cout << "Error occuring creating log file" << endl;
 		return;
 	}
 
@@ -221,13 +219,11 @@ void write_tolog(Matrix * A)
 
 void solution(Matrix * A)
 {
-	FILE *log = fopen("log.txt", "a+");
+	FILE *log = fopen(LOGFILENAME, "a+");
 
 	if (log == NULL)
 	{
-		printf("Error occuring creating log file\n");
-		printf("Press any key\n");
-		_getch();
+		cout << "Error occuring creating log file" << endl;
 		return;
 	}
 
@@ -266,19 +262,19 @@ void solution(Matrix * A)
 	fprintf(log, "======================================================\n");
 	if (!check)
 	{
-		cout << "There\'s no zeros\n";
+		cout << "There\'s no zeros" << endl;
 		fprintf(log, "There\'s no zeros\n");
 	}
 	else
 	{
 		if (min == 0) 
 		{
-			cout << "There\'s no positive after first zero\n";
+			cout << "There\'s no positive after first zero" << endl;
 			fprintf(log, "There\'s no positive after first zero\n"); 
 		}
 		else
 		{
-			cout << "Minimal element is " << min << "\nIts index is " << line_index << " line & " << col_index << " column\n";
+			cout << "Minimal element is " << min << "\nIts index is " << line_index << " line & " << col_index << " column" << endl;
 			fprintf(log, "Minimal element is %i\nIts index is %i line & %i column\n", min, line_index, col_index);
 		}
 	}
